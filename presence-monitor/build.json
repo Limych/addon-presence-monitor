@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "debian:stretch-slim",
+    "amd64": "debian:stretch-slim",
+    "armhf": "debian:stretch-slim",
+    "armv7": "debian:stretch-slim",
+    "i386": "debian:stretch-slim"
+  },
+  "args": {}
+}
