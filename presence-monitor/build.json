@@ -1,10 +1,12 @@
 {
+  "image": "limych/hassio-presence-monitor-{arch}",
+  "squash": false,
   "build_from": {
-    "aarch64": "debian:stretch-slim",
-    "amd64": "debian:stretch-slim",
-    "armhf": "debian:stretch-slim",
-    "armv7": "debian:stretch-slim",
-    "i386": "debian:stretch-slim"
+    "aarch64": "hassioaddons/base-aarch64:5.0.3",
+    "amd64": "hassioaddons/base-amd64:5.0.3",
+    "armhf": "hassioaddons/base-armhf:5.0.3",
+    "armv7": "hassioaddons/base-armv7:5.0.3",
+    "i386": "hassioaddons/base-i386:5.0.3"
   },
   "args": {}
 }

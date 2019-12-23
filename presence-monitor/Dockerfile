@@ -2,39 +2,40 @@
 # Multi stage build of add-on container
 #
 
-ARG BUILD_FROM=debian:stretch-slim
+ARG BUILD_FROM=hassioaddons/base:5.0.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
-
-ENV LANG C.UTF-8
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Setup base
 ARG BUILD_ARCH=amd64
-RUN \
-    apt-get update \
-    && apt-get install -y --no-install-recommends \
-        bash \
-        bluetooth \
+RUN apk add --no-cache \
         bluez \
-        bluez-hcidump \
-        bc \
-        usbutils \
+        bluez-btmon \
+        bluez-deprecated \
+        dbus \
         git \
-        curl \
-        ca-certificates \
         mosquitto-clients \
-    && git clone https://github.com/andrewjfreyer/monitor.git /monitor
+    && git clone --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor
 
 # Copy root filesystem
 COPY rootfs /
 
-ENTRYPOINT ["/run.sh"]
-
 WORKDIR /monitor
-CMD ["/bin/bash", "monitor.sh", "-D", "/config"]
+
+RUN touch .pids
+RUN touch .previous_version
+    # make things executable
+RUN ln -s /monitor/monitor.sh /usr/local/bin/monitor
+RUN chmod a+x monitor.sh
+RUN touch /config/.public_name_cache
+    # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as /config) and sometimes its in the app root (i.e. /monitor)
+RUN ln -s /config/.public_name_cache .public_name_cache
+    # no systemctl ... this keeps the error out about it
+RUN sed -i 's|systemctl is-active.*|SERVICE_ACTIVE=false|' support/init
+    # default config directory to come from an environment variable
+RUN sed -i 's|PREF_CONFIG_DIR='"''"'|PREF_CONFIG_DIR="/config"|' support/argv
 
 #
 # LABEL target docker image
