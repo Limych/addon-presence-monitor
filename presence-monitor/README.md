@@ -1,8 +1,78 @@
 
-# Add add-on
+# Configuration
 
-Go to "ADD-ON STORE" and add the https://github.com/Limych/hassio-addons to "Add new repository by URL".
+**Note:** _Remember to restart the add-on when the configuration is changed._
 
-After that Limych's add-ons should show under the title: Limych's Hass.io Add-ons
+Bluetooth Presence Monitor Hass.io add-on configuration:
 
-# Configuration add-on
+```json
+{
+  "log_level": "info",
+  "mqtt": {
+    "broker": "127.0.0.1",
+    "port": 1883,
+    "username": "user",
+    "password": "secret_password",
+    "topic_root": "/presence",
+    "publisher": "",
+    "certfile": "",
+    "version": ""
+  },
+  "known": {
+    "beacons": [
+      "00:00:00:00:00:00 nickname",
+      "00:00:00:00:00:01 other_nickname"
+    ],
+    "static": [
+      "00:00:00:00:00:02",
+      "00:00:00:00:00:03 alias"
+    ]
+  },
+  "blacklist": [
+    "00:00:00:00:00:04"
+  ]
+}
+```
+
+**Note:** _This is just an example, don't copy and paste it! Create your own!_
+
+### Option: `log_level`
+
+The `log_level` option controls the level of log output by the addon and can be changed to be more or less verbose, which might be useful when you are dealing with an unknown issue. Possible values are:
+
+* `trace`: Show every detail, like all called internal functions.
+* `debug`: Shows detailed debug information.
+* `info`: Normal (usually) interesting events.
+* `warning`: Exceptional occurrences that are not errors.
+* `error`: Runtime errors that do not require immediate action.
+* `fatal`: Something went terribly wrong. Add-on becomes unusable.
+
+Please note that each level automatically includes log messages from a more severe level, e.g., `debug` also shows `info` messages. By default, the `log_level` is set to `info`, which is the recommended setting unless you are troubleshooting.
+
+### Option group `mqtt`
+
+---
+
+The following options are only for the option group: `mqtt`. They determine the settings for connecting to the MQTT-server.
+
+#### Option `mqtt`: `broker`
+
+This option allows you to change hostname or IP-address of MQTT-server to which add-on connect.
+If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
+
+#### Option `mqtt`: `port`
+
+This option allows you to change port of MQTT-server to which add-on connect.
+If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
+
+#### Option `mqtt`: `username`
+
+This option allows you to change the username which add-on use to connect to MQTT-server.
+
+**Note**: _This option is required, but not set by default._
+
+#### Option `mqtt`: `password`
+
+This option allows you to change the password which add-on use to connect to MQTT-server.
+
+**Note**: _This option is required, but not set by default._

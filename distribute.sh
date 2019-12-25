@@ -29,13 +29,13 @@ else
         echo "Not on master branch. Aborting distribution script"
         exit 0
     fi
-    echo "Untagged push to master branch identified. Pushing container image to Docker with tag 'test'."
+    echo "Untagged push to master branch identified. Pushing container image to Docker with tag 'edge'."
 
     docker run -it --rm --privileged --name "${ADDON_NAME}" \
         -v "${ROOT_DIR}":/docker \
         hassioaddons/build-env:latest \
         --target "${ADDON_NAME}" \
-        --tag-test \
+        --tag-edge \
         --push \
         --all \
         --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
