@@ -14,10 +14,10 @@
   ],
   "boot": "auto",
   "host_network": true,
-  "privileged": [],
+  "privileged": [
+    "NET_ADMIN"
+  ],
   "map": [
-    "config:rw",
-    "share:rw",
     "ssl"
   ],
   "options": {
@@ -26,21 +26,18 @@
       "port": 1883,
       "username": "",
       "password": "",
-      "topic_root": "/monitor",
+      "topic_root": "/presence",
       "publisher": "presence_monitor",
       "certfile": "",
       "version": ""
     },
     "known": {
       "beacons": [
-        "00:00:00:00:00:00 Nickname"
       ],
       "static": [
-        "00:00:00:00:00:00 Alias"
       ]
     },
     "blacklist": [
-      "00:00:00:00:00:00"
     ]
   },
   "schema": {

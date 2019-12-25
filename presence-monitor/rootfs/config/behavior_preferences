@@ -1,7 +1,0 @@
-# ---------------------------
-#                               
-# BEHAVIOR PREFERENCES
-#                               
-# ---------------------------
-
-# Note: For docker by default we will just expect these to be container environment variables

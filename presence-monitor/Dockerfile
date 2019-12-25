@@ -1,41 +1,49 @@
-#
-# Multi stage build of add-on container
-#
-
-ARG BUILD_FROM=hassioaddons/base:5.0.3
+ARG BUILD_FROM=hassioaddons/debian-base:latest
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-ARG BUILD_ARCH=amd64
-RUN apk add --no-cache \
+# Install required packages
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bc \
+        bluetooth \
         bluez \
-        bluez-btmon \
-        bluez-deprecated \
-        dbus \
+        bluez-hcidump \
         git \
         mosquitto-clients \
-    && git clone --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor
+        procps \
+        usbutils \
+    && git clone --branch "master" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor
 
 # Copy root filesystem
 COPY rootfs /
 
+# Configure system
+ARG PREF_CONFIG_DIR=/opt/monitor
+RUN install -d \
+        ${PREF_CONFIG_DIR} \
+    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" /etc/cont-init.d/monitor-configs.sh \
+    \
+    && cd /monitor \
+    && touch \
+        .pids \
+        .previous_version \
+        ${PREF_CONFIG_DIR}/.public_name_cache \
+    # make things executable
+    && ln -s /monitor/monitor.sh /usr/local/bin/monitor \
+    && chmod a+x \
+        monitor.sh \
+        /run.sh \
+    # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as ${PREF_CONFIG_DIR}) and sometimes its in the app root (i.e. /monitor)
+    && ln -s ${PREF_CONFIG_DIR}/.public_name_cache .public_name_cache \
+    # no systemctl ... this keeps the error out about it
+    && sed -i "s|systemctl is-active.*|SERVICE_ACTIVE=false|" support/init \
+    # default config directory to come from an environment variable
+    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" support/argv
+
 WORKDIR /monitor
 
-RUN touch .pids
-RUN touch .previous_version
-    # make things executable
-RUN ln -s /monitor/monitor.sh /usr/local/bin/monitor
-RUN chmod a+x monitor.sh
-RUN touch /config/.public_name_cache
-    # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as /config) and sometimes its in the app root (i.e. /monitor)
-RUN ln -s /config/.public_name_cache .public_name_cache
-    # no systemctl ... this keeps the error out about it
-RUN sed -i 's|systemctl is-active.*|SERVICE_ACTIVE=false|' support/init
-    # default config directory to come from an environment variable
-RUN sed -i 's|PREF_CONFIG_DIR='"''"'|PREF_CONFIG_DIR="/config"|' support/argv
+CMD /run.sh
 
 #
 # LABEL target docker image

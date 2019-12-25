@@ -1,8 +1,0 @@
-#!/usr/bin/env bashio
-# ==============================================================================
-# Limych's Hass.io Add-ons: Bluetooth Presence Monitor
-# Starts the D-Bus daemon
-# ==============================================================================
-
-exec dbus-daemon --system --nofork \
-  || bashio::exit.nok 'Failed to start D-Bus daemon'
