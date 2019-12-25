@@ -4,5 +4,5 @@
   ],
   "commitMessageAction": "Updates",
   "commitMessageTopic": "{{depName}}",
-  "commitMessagePrefix": ":arrow_up:",
+  "commitMessagePrefix": ":arrow_up:"
 }
