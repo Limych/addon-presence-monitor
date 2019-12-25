@@ -66,8 +66,8 @@ LABEL \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Bluetooth Presence Monitor" \
     org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://github.com/Limych/hassio-addons/presence-monitor" \
-    org.label-schema.usage="https://github.com/Limych/hassio-addons/presence-monitor/tree/master/README.md" \
+    org.label-schema.url="https://github.com/Limych/hassio-addons/tree/master/presence-monitor" \
+    org.label-schema.usage="https://github.com/Limych/hassio-addons/presence-monitor/tree/master/usage.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/Limych/hassio-addons/presence-monitor" \
+    org.label-schema.vcs-url="https://github.com/Limych/hassio-addons/tree/master/presence-monitor" \
     org.label-schema.vendor="Limych's Hass.io Addons"
