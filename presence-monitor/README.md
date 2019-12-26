@@ -70,16 +70,18 @@ The following options are only for the option group: `mqtt`. They determine the 
 #### Option `mqtt`: `broker`
 
 This option allows you to change hostname or IP-address of MQTT-server to which add-on connect.
-If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
 
 **Default value**: _"127.0.0.1"_ (same device)
+
+**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it._ 
 
 #### Option `mqtt`: `port`
 
 This option allows you to change port of MQTT-server to which add-on connect.
-If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
 
 **Default value**: _1883_
+
+**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on with default ports settings you don't need to change it._ 
 
 #### Option `mqtt`: `username`
 
