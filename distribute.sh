@@ -24,13 +24,13 @@ if [ ! -z "$TRAVIS_TAG" ]; then
         --password "${DOCKER_PASSWORD}" \
         --parallel
 else
-    echo "Untagged push identified. Pushing container image to Docker with tag 'edge'."
+    echo "Untagged push identified. Pushing container image to Docker with tag 'test'."
 
     docker run -it --rm --privileged --name "${ADDON_NAME}" \
         -v "${ROOT_DIR}":/docker \
         hassioaddons/build-env:latest \
         --target "${ADDON_NAME}" \
-        --tag-edge \
+        --tag-test \
         --push \
         --all \
         --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
