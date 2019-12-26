@@ -86,3 +86,21 @@ This option allows you to change the username which add-on use to connect to MQT
 This option allows you to change the password which add-on use to connect to MQTT-server.
 
 **Note**: _This option is required, but not set by default._
+
+#### Option `mqtt`: `topic_root`
+
+#### Option `mqtt`: `publisher`
+
+#### Option `mqtt`: `certfile`
+
+#### Option `mqtt`: `version`
+
+### Option group `known`
+
+---
+
+#### Option `known`: `beacons`
+
+#### Option `known`: `static`
+
+### Option `blacklist`
