@@ -1,6 +1,6 @@
 {
   "name": "Bluetooth Presence Monitor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "slug": "presence-monitor",
   "description": "Passive Bluetooth presence detection of beacons, cell phones, and other Bluetooth devices.",
   "url": "https://github.com/Limych/hassio-addons/tree/master/presence-monitor",
@@ -15,6 +15,7 @@
   ],
   "boot": "auto",
   "host_network": true,
+  "hassio_api": true,
   "privileged": [
     "NET_ADMIN"
   ],
@@ -54,9 +55,15 @@
       "version": "str"
     },
     "known": {
-      "beacons": ["match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}\\s+\\w+$)"],
-      "static": ["match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}(\\s+\\w+)*$)"]
+      "beacons": [
+        "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}\\s+\\w+$)"
+      ],
+      "static": [
+        "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}(\\s+\\w+)*$)"
+      ]
     },
-    "blacklist": ["match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$)"]
+    "blacklist": [
+      "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$)"
+    ]
   }
 }

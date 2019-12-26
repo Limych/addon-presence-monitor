@@ -11,10 +11,9 @@ declare publisher
 publisher="$(bashio::config mqtt.publisher)"
 if [[ -z "${publisher}" ]]; then
     publisher="hassio"
-    # if bashio::supervisor.ping; then
-    #     publisher=$(bashio::host.hostname)
-    # elif bashio::fs.file_exists '/data/hostname'; then
-    if bashio::fs.file_exists '/data/hostname'; then
+     if bashio::supervisor.ping; then
+         publisher=$(bashio::host.hostname)
+     elif bashio::fs.file_exists '/data/hostname'; then
         publisher=$(</data/hostname)
     fi
 fi
@@ -25,9 +24,9 @@ echo "${PREF_CONFIG_DIR}" >/var/run/s6/container_environment/PREF_CONFIG_DIR
 
 cat >"${PREF_CONFIG_DIR}/behavior_preferences" <<EOF
 # ---------------------------
-#                               
+#
 # BEHAVIOR PREFERENCES
-#                               
+#
 # ---------------------------
 
 # MAX RETRY ATTEMPTS FOR ARRIVAL
@@ -47,22 +46,22 @@ PREF_PASS_FILTER_ADV_FLAGS_ARRIVE=".*"
 PREF_PASS_FILTER_MANUFACTURER_ARRIVE=".*"
 
 # ARRIVE TRIGGER NEGATIVE FILTER(S)
-PREF_FAIL_FILTER_ADV_FLAGS_ARRIVE="NONE" 
+PREF_FAIL_FILTER_ADV_FLAGS_ARRIVE="NONE"
 PREF_FAIL_FILTER_MANUFACTURER_ARRIVE="NONE"
 
 EOF
 
 cat >"${PREF_CONFIG_DIR}/mqtt_preferences" <<EOF
 # ---------------------------
-#                               
+#
 # MQTT PREFERENCES
-#                               
+#
 # ---------------------------
 
 # IP ADDRESS OR HOSTNAME OF MQTT BROKER
 mqtt_address='$(bashio::config mqtt.broker)'
 
-# MQTT BROKER PORT 
+# MQTT BROKER PORT
 mqtt_port='$(bashio::config mqtt.port)'
 
 # MQTT BROKER USERNAME
@@ -71,10 +70,10 @@ mqtt_user='$(bashio::config mqtt.username)'
 # MQTT BROKER PASSWORD
 mqtt_password='$(bashio::config mqtt.password)'
 
-# MQTT PUBLISH TOPIC ROOT 
+# MQTT PUBLISH TOPIC ROOT
 mqtt_topicpath='$(bashio::config mqtt.topic_root)'
 
-# PUBLISHER IDENTITY 
+# PUBLISHER IDENTITY
 mqtt_publisher_identity='${publisher}'
 
 # MQTT CERTIFICATE FILE

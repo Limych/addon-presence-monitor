@@ -7,7 +7,7 @@ services:
 jobs:
   include:
   - stage: Deploy Docker Images to Docker Hub
-    if: type != pull_request AND (branch = master OR tag IS present)
+    if: type != pull_request
     script:
     - "$TRAVIS_BUILD_DIR/distribute.sh"
 env:

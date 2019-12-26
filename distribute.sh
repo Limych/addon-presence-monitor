@@ -24,12 +24,7 @@ if [ ! -z "$TRAVIS_TAG" ]; then
         --password "${DOCKER_PASSWORD}" \
         --parallel
 else
-    echo "No tag found."
-    if [ "$TRAVIS_BRANCH" != "master" ]; then
-        echo "Not on master branch. Aborting distribution script"
-        exit 0
-    fi
-    echo "Untagged push to master branch identified. Pushing container image to Docker with tag 'test'."
+    echo "Untagged push identified. Pushing container image to Docker with tag 'test'."
 
     docker run -it --rm --privileged --name "${ADDON_NAME}" \
         -v "${ROOT_DIR}":/docker \
