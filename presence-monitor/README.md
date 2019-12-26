@@ -59,6 +59,8 @@ I put a lot of work into making this repo and component available and updated to
 16yfCfz9dZ8y8yuSwBFVfiAa3CNYdMh7Ts</a>
 </p>
 
+
+
 ### Option group `mqtt`
 
 ---
@@ -70,37 +72,80 @@ The following options are only for the option group: `mqtt`. They determine the 
 This option allows you to change hostname or IP-address of MQTT-server to which add-on connect.
 If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
 
+**Default value**: _"127.0.0.1"_ (same device)
+
 #### Option `mqtt`: `port`
 
 This option allows you to change port of MQTT-server to which add-on connect.
 If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it. 
 
+**Default value**: _1883_
+
 #### Option `mqtt`: `username`
 
-This option allows you to change the username which add-on use to connect to MQTT-server.
+This option allows you to set the username which add-on use to connect to MQTT-server.
 
 **Note**: _This option is required, but not set by default._
 
 #### Option `mqtt`: `password`
 
-This option allows you to change the password which add-on use to connect to MQTT-server.
+This option allows you to set the password which add-on use to connect to MQTT-server.
 
 **Note**: _This option is required, but not set by default._
 
 #### Option `mqtt`: `topic_root`
 
+This option allows you to change the root of MQTT topics branch the Bluetooth Presence Monitor will publish data to.
+
+**Default value**: _"/presence"_
+
+**Note**: _If you have already configured presence monitors installed without this addon perhaps you need to change `topic_root` to "/monitor"._
+
 #### Option `mqtt`: `publisher`
+
+This option allows you to change publisher identity of this Bluetooth Presence Monitor. Only this value allows you to distinguish one monitor instance from another one.
+
+**Default value**: _""_ (empty)
+
+**Note**: _If this field is empty (default value), the system will automatically substitute the hostname of the host device. This is usually "hassio"._
 
 #### Option `mqtt`: `certfile`
 
 #### Option `mqtt`: `version`
 
+
+
 ### Option group `known`
 
 ---
 
+The following options are only for the option group: `known`. They determine the unique ID's (MAC-addresses) of devices which you want to monitor.
+
+**MAC-address format:** _"XX:XX:XX:XX:XX:XX" Where each X is a hexadecimal digit (0-9A-F)_
+
 #### Option `known`: `beacons`
+
+This option allow you to set list of MAC-addresses of [iBeacons](https://en.wikipedia.org/wiki/IBeacon) and similar devices which use a little different protocol.
+Each device must be described in a separate list item.
+
+**Items format:** _"{MAC-address} {nickname of device}"_
+
+**Note**: _Nicknames are required._
 
 #### Option `known`: `static`
 
+This option allow you to set list of MAC-addresses of common devices.
+Each device must be described in a separate list item.
+
+**Items format:** _"{MAC-address} {alias of device}"_
+
+**Note**: _Aliases are optional. If no alias is specified, the Presence Monitor will name the device by its MAC-address._
+
+
+
 ### Option `blacklist`
+
+This option allow you to set list of MAC-addresses of devices you don't want to monitor.
+Each device must be described in a separate list item.
+
+**Items format:** _"{MAC-address}"_
