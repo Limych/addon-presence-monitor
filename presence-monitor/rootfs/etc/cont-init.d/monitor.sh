@@ -4,11 +4,12 @@
 # Runs some initializations for Bluetooth Presence Monitor
 # ==============================================================================
 
-PREF_CONFIG_DIR="/opt/monitor"
+readonly PREF_CONFIG_DIR="/opt/monitor"
+readonly SHARE="/share/presence-monitor"
 
-declare publisher
+echo "${PREF_CONFIG_DIR}" >/var/run/s6/container_environment/PREF_CONFIG_DIR
 
-publisher="$(bashio::config mqtt.publisher)"
+declare publisher="$(bashio::config mqtt.publisher)"
 if [[ -z "${publisher}" ]]; then
     publisher="hassio"
      if bashio::supervisor.ping; then
@@ -18,15 +19,23 @@ if [[ -z "${publisher}" ]]; then
     fi
 fi
 
-bashio::log.info "Create Bluetooth Presence Monitor config files..."
+declare certpath="$(bashio::config mqtt.certfile)"
+if [[ -n "${certpath}" ]]; then
+    certpath="${SHARE}/${certpath}"
+fi
 
-echo "${PREF_CONFIG_DIR}" >/var/run/s6/container_environment/PREF_CONFIG_DIR
+bashio::log.info "Updating running configuration..."
 
-cat >"${PREF_CONFIG_DIR}/behavior_preferences" <<EOF
+# Create share folder if it does not exist
+if ! bashio::fs.directory_exists "${SHARE}"; then
+    mkdir "${SHARE}"
+fi
+
+ln -s "${SHARE}/behavior_preferences" "${PREF_CONFIG_DIR}/behavior_preferences"
+[[ ! -f "${SHARE}/behavior_preferences" ]] \
+    && cat >"${SHARE}/behavior_preferences" <<EOF
 # ---------------------------
-#
 # BEHAVIOR PREFERENCES
-#
 # ---------------------------
 
 # MAX RETRY ATTEMPTS FOR ARRIVAL
@@ -53,9 +62,7 @@ EOF
 
 cat >"${PREF_CONFIG_DIR}/mqtt_preferences" <<EOF
 # ---------------------------
-#
 # MQTT PREFERENCES
-#
 # ---------------------------
 
 # IP ADDRESS OR HOSTNAME OF MQTT BROKER
@@ -77,7 +84,7 @@ mqtt_topicpath='$(bashio::config mqtt.topic_root)'
 mqtt_publisher_identity='${publisher}'
 
 # MQTT CERTIFICATE FILE
-mqtt_certificate_path='$(bashio::config mqtt.certfile)'
+mqtt_certificate_path='${certpath}'
 
 # MQTT VERSION (EXAMPLE: 'mqttv311')
 mqtt_version='$(bashio::config mqtt.version)'
@@ -86,9 +93,7 @@ EOF
 
 cat >"${PREF_CONFIG_DIR}/address_blacklist" <<EOF
 # ---------------------------
-#
-# LIST OF MAC ADDRESSES TO IGNORE, ONE PER LINE:
-#
+# LIST OF MAC ADDRESSES TO IGNORE, ONE PER LINE
 # ---------------------------
 
 $(bashio::config blacklist)
@@ -97,9 +102,7 @@ EOF
 
 cat >"${PREF_CONFIG_DIR}/known_beacon_addresses" <<EOF
 # ---------------------------
-#
 # BEACON MAC ADDRESS LIST; REQUIRES NAME
-#
 #   Format: 00:00:00:00:00:00 Nickname #comments
 # ---------------------------
 
@@ -109,9 +112,7 @@ EOF
 
 cat >"${PREF_CONFIG_DIR}/known_static_addresses" <<EOF
 # ---------------------------
-#
 # STATIC MAC ADDRESS LIST
-#
 #   Format: 00:00:00:00:00:00 Alias #comment
 # ---------------------------
 

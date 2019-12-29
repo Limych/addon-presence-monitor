@@ -15,7 +15,7 @@ cleanup() {
 
     service bluetooth stop
     service dbus stop
-    
+
     exec echo
 }
 
