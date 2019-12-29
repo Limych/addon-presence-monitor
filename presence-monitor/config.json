@@ -1,6 +1,6 @@
 {
   "name": "Bluetooth Presence Monitor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "slug": "presence-monitor",
   "description": "Passive Bluetooth presence detection of beacons, cell phones, and other Bluetooth devices.",
   "url": "https://github.com/Limych/hassio-addons/tree/master/presence-monitor",
@@ -20,14 +20,14 @@
     "NET_ADMIN"
   ],
   "map": [
-    "ssl"
+    "share:rw"
   ],
   "options": {
     "mqtt": {
       "broker": "127.0.0.1",
       "port": 1883,
-      "username": null,
-      "password": null,
+      "username": "",
+      "password": "",
       "topic_root": "presence",
       "publisher": "",
       "certfile": "",

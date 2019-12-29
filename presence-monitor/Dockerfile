@@ -22,7 +22,7 @@ COPY rootfs /
 ARG PREF_CONFIG_DIR=/opt/monitor
 RUN install -d \
         ${PREF_CONFIG_DIR} \
-    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" /etc/cont-init.d/monitor-configs.sh \
+    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" /etc/cont-init.d/monitor.sh \
     \
     && cd /monitor \
     && touch \

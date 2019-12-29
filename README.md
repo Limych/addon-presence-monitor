@@ -133,13 +133,13 @@ This option allows you to change port of MQTT-server to which add-on connect.
 
 This option allows you to set the username which add-on use to connect to MQTT-server.
 
-**Note**: _This option is required, but not set by default._
+**Default value**: _""_ (empty)
 
 #### Option `mqtt`: `password`
 
 This option allows you to set the password which add-on use to connect to MQTT-server.
 
-**Note**: _This option is required, but not set by default._
+**Default value**: _""_ (empty)
 
 #### Option `mqtt`: `topic_root`
 
