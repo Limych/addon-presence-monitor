@@ -37,5 +37,9 @@ if bashio::config.has_value 'log_level'; then
     esac
 fi
 
+if bashio::config.has_value 'known.beacons'; then
+    options+=(-b)
+fi
+
 monitor "${options[@]}" "${@}" >&2
 exit $?
