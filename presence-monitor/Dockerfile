@@ -44,6 +44,7 @@ RUN install -d \
 WORKDIR /monitor
 
 CMD /run.sh
+HEALTHCHECK CMD /health.sh
 
 #
 # LABEL target docker image

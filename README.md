@@ -145,9 +145,9 @@ This option allows you to set the password which add-on use to connect to MQTT-s
 
 This option allows you to change the root of MQTT topics branch the Bluetooth Presence Monitor will publish data to.
 
-**Default value**: _"/presence"_
+**Default value**: _"presence"_
 
-**Note**: _If you have already configured presence monitors installed without this addon perhaps you need to change `topic_root` to "/monitor"._
+**Note**: _If you have already configured presence monitors installed without this addon perhaps you need to change `topic_root` to "monitor"._
 
 #### Option `mqtt`: `publisher`
 

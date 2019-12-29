@@ -28,7 +28,7 @@
       "port": 1883,
       "username": null,
       "password": null,
-      "topic_root": "/presence",
+      "topic_root": "presence",
       "publisher": "",
       "certfile": "",
       "version": ""
