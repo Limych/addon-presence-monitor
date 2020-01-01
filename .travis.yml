@@ -1,15 +1,15 @@
 sudo: required
 language: python
 python:
-- 3.7
+  - 3.7
 services:
-- docker
+  - docker
 jobs:
   include:
-  - stage: Deploy Docker Images to Docker Hub
-    if: type != pull_request
-    script:
-    - "$TRAVIS_BUILD_DIR/distribute.sh"
+    - stage: Deploy Docker Images to Docker Hub
+      if: type != pull_request
+      script:
+        - "$TRAVIS_BUILD_DIR/distribute.sh"
 env:
   global:
     - ADDON_NAME=presence-monitor
