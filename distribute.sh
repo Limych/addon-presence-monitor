@@ -8,15 +8,34 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
-docker run -it --rm --privileged --name "${ADDON_NAME}" \
-    -v "${ROOT_DIR}":/docker \
-    hassioaddons/build-env:latest \
-    --target "${ADDON_NAME}" \
-    --git \
-    --push \
-    --all \
-    --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
-    --doc-url "${GITHUB_URL}" \
-    --login "${DOCKER_USERNAME}" \
-    --password "${DOCKER_PASSWORD}" \
-    --parallel
+if [ ! -z "$TRAVIS_TAG" ]; then
+    echo "Tagged build found. Pushing container image to Docker with tag 'latest'."
+
+    docker run -it --rm --privileged --name "${ADDON_NAME}" \
+        -v "${ROOT_DIR}":/docker \
+        hassioaddons/build-env:latest \
+        --target "${ADDON_NAME}" \
+        --tag-latest \
+        --push \
+        --all \
+        --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
+        --doc-url "${GITHUB_URL}" \
+        --login "${DOCKER_USERNAME}" \
+        --password "${DOCKER_PASSWORD}" \
+        --parallel
+else
+    echo "Untagged push identified. Pushing container image to Docker with tag 'test'."
+
+    docker run -it --rm --privileged --name "${ADDON_NAME}" \
+        -v "${ROOT_DIR}":/docker \
+        hassioaddons/build-env:latest \
+        --target "${ADDON_NAME}" \
+        --tag-test \
+        --push \
+        --all \
+        --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
+        --doc-url "${GITHUB_URL}" \
+        --login "${DOCKER_USERNAME}" \
+        --password "${DOCKER_PASSWORD}" \
+        --parallel
+fi
