@@ -41,5 +41,7 @@ if bashio::config.has_value 'known.beacons'; then
     options+=(-b)
 fi
 
-monitor "${options[@]}" "${@}" >&2
+while monitor "${options[@]}" "${@}" >&2; do
+    bashio::log.info "Restarting Bluetooth Presence Monitor..."
+done
 exit $?
