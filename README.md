@@ -86,7 +86,8 @@ Bluetooth Presence Monitor Hass.io add-on configuration:
   },
   "blacklist": [
     "00:00:00:00:00:04"
-  ]
+  ],
+  "extra_arguments": "-a -x -b -tdr"
 }
 ```
 
@@ -236,6 +237,8 @@ Extra options to pass to presence monitor script. There are list of useful argum
                 r send ARRIVE or DEPART messages to trigger other devices to scan
 ```
 
+**Note:** _The `-b` is adding automatically then you have one or more IDs in `known.beacons` section._
+
 ## Known issues and limitations
 
 ## Changelog & Releases
@@ -299,7 +302,7 @@ SOFTWARE.
 [keepchangelog]: http://keepachangelog.com/en/1.0.0/
 [license-shield]: https://img.shields.io/github/license/Limych/addon-presence-monitor.svg
 [limych]: https://github.com/Limych
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-beta-yellow.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 <!-- [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg -->
 [releases-shield]: https://img.shields.io/github/release/Limych/addon-presence-monitor.svg
 [releases]: https://github.com/Limych/addon-presence-monitor/releases
