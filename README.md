@@ -237,7 +237,7 @@ Extra options to pass to presence monitor script. There are list of useful argum
                 r send ARRIVE or DEPART messages to trigger other devices to scan
 ```
 
-**Note:** _The `-b` is adding automatically then you have one or more IDs in `known.beacons` section._
+**Note:** _The `-b` option is adding automatically then you have one or more IDs in `known.beacons` section._
 
 ## Known issues and limitations
 
@@ -304,7 +304,7 @@ SOFTWARE.
 [limych]: https://github.com/Limych
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 <!-- [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg -->
-[releases-shield]: https://img.shields.io/github/release/Limych/addon-presence-monitor.svg
+[releases-shield]: https://img.shields.io/github/tag-date/Limych/ha-iaquk?label=release
 [releases]: https://github.com/Limych/addon-presence-monitor/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
 [travisci-shield]: https://img.shields.io/travis/Limych/addon-presence-monitor.svg
