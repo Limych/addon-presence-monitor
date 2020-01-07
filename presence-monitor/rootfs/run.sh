@@ -4,10 +4,6 @@
 # Run Bluetooth Presence Monitor
 # ==============================================================================
 
-declare -a options
-
-
-
 bashio::log.info "Starting required services..."
 
 cleanup() {
@@ -28,20 +24,22 @@ service bluetooth start
 
 bashio::log.info "Starting Bluetooth Presence Monitor..."
 
+declare -a args
+
 # Find the matching Bluetooth Presence Monitor log level
 if bashio::config.has_value 'log_level'; then
     case "$(bashio::string.lower "$(bashio::config 'log_level')")" in
         all|trace|debug)
-            options+=(-V)
+            args+=(-V)
             ;;
     esac
 fi
 
 if bashio::config.has_value 'known.beacons'; then
-    options+=(-b)
+    args+=(-b)
 fi
 
-while monitor "${options[@]}" "${@}" >&2; do
+while monitor "${args[@]}" "$(bashio::config 'extra_arguments')" "${@}" >&2; do
     bashio::log.info "Restarting Bluetooth Presence Monitor..."
 done
 exit $?

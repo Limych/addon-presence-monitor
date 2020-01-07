@@ -23,7 +23,7 @@ Passive Bluetooth presence detection of beacons, cell phones, and other Bluetoot
 
 ## About
 
-This add-on actually is a usage convenient shell for launching [the Andrew J Freyer's monitor script](https://github.com/andrewjfreyer/monitor) on the same machine where the Home Assistant itself works.  
+This add-on actually is a usage convenient shell for launching [the Andrew J Freyer's monitor script](https://github.com/andrewjfreyer/monitor) on the same machine where the Home Assistant itself works.
 This script useful for MQTT-based home automation, especially when the script runs on multiple devices, distributed throughout a property.
 
 You can combine add-on and common versions of this presence monitor script in any combinations.
@@ -106,7 +106,6 @@ The `log_level` option controls the level of log output by the addon and can be 
 Please note that each level automatically includes log messages from a more severe level, e.g., `debug` also shows `info` messages. By default, the `log_level` is set to `info`, which is the recommended setting unless you are troubleshooting.
 
 
-
 ### Option group `mqtt`
 
 ---
@@ -119,7 +118,7 @@ This option allows you to change hostname or IP-address of MQTT-server to which 
 
 **Default value**: _"127.0.0.1"_ (same device)
 
-**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it._ 
+**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on you don't need to change it._
 
 #### Option `mqtt`: `port`
 
@@ -127,7 +126,7 @@ This option allows you to change port of MQTT-server to which add-on connect.
 
 **Default value**: _1883_
 
-**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on with default ports settings you don't need to change it._ 
+**Note**: _If you use official Hass.io "Mosquitto broker" add-on or Community Hass.io "MQTT Server & Web client" add-on with default ports settings you don't need to change it._
 
 #### Option `mqtt`: `username`
 
@@ -211,6 +210,31 @@ This option allow you to set list of MAC-addresses of devices you don't want to 
 Each device must be described in a separate list item.
 
 **Items format:** _"{MAC-address}"_
+
+### Option `extra_arguments`
+
+Extra options to pass to presence monitor script. There are list of useful arguments for current version of script:
+
+```text
+-R      redact private information from logs
+-S      silent operation (no logging)
+-c addr create connection to bluetooth device
+-C      clean retained messages from MQTT broker
+-E      report scan status messages:
+                [topic path]/scan/[arrive|depart]/[start|end]
+
+-s  report all mqtt messages to a single topic with
+                $mqtt_topicpath/$mqtt_publisher_identity  (defined in MQTT preferences file)
+
+-f      format MQTT topics with only letters and numbers
+-a      report all known device scan results, not just changes
+-x      retain mqtt status messages
+-b      report bluetooth beacons (e.g., generic beacons, ibeacons, and so on)
+-t[adr] scan for known devices only on mqtt trigger messages:
+                a $mqtt_topicpath/scan/ARRIVE (defined in MQTT preferences file)
+                d $mqtt_topicpath/scan/DEPART (defined in MQTT preferences file)
+                r send ARRIVE or DEPART messages to trigger other devices to scan
+```
 
 ## Known issues and limitations
 

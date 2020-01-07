@@ -64,6 +64,7 @@
     },
     "blacklist": [
       "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$)"
-    ]
+    ],
+    "extra_arguments": "str"
   }
 }
