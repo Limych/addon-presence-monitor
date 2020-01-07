@@ -11,12 +11,53 @@ Passive Bluetooth presence detection of beacons, cell phones, and other Bluetoot
 
 ## About
 
-This add-on actually is a usage convenient shell for launching [the Andrew J Freyer's monitor script](https://github.com/andrewjfreyer/monitor) on the same machine where the Home Assistant itself works.  
+This add-on actually is a usage convenient shell for launching [the Andrew J Freyer's monitor script](https://github.com/andrewjfreyer/monitor) on the same machine where the Home Assistant itself works.
 This script useful for MQTT-based home automation, especially when the script runs on multiple devices, distributed throughout a property.
 
 You can combine add-on and common versions of this presence monitor script in any combinations.
 
 [Click here for the full documentation][docs]
+
+
+{% if channel == "edge" %}
+## WARNING! THIS IS AN EDGE VERSION!
+
+This Hass.io Add-ons repository contains edge builds of add-ons. Edge builds
+add-ons are based upon the latest development version.
+
+- They may not work at all.
+- They might stop working at any time.
+- They could have a negative impact on your system.
+
+This repository was created for:
+
+- Anybody willing to test.
+- Anybody interested in trying out upcoming add-ons or add-on features.
+- Developers.
+
+If you are more interested in stable releases of our add-ons:
+
+<https://github.com/Limych/hassio-addons>
+
+{% endif %}
+{% if channel == "beta" %}
+## WARNING! THIS IS A BETA VERSION!
+
+This Hass.io Add-ons repository contains beta releases of add-ons.
+
+- They might stop working at any time.
+- They could have a negative impact on your system.
+
+This repository was created for:
+
+- Anybody willing to test.
+- Anybody interested in trying out upcoming add-ons or add-on features.
+
+If you are more interested in stable releases of our add-ons:
+
+<https://github.com/Limych/hassio-addons>
+
+{% endif %}
 
 [docs]: https://github.com/Limych/addon-presence-monitor/blob/master/README.md
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-beta-yellow.svg
