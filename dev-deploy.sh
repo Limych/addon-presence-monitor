@@ -32,16 +32,38 @@ die() {
 
 
 
-ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+ROOT_DIR=$(dirname "$(readlink -f "$0")")
 
-HASSIO_ADDONS="${ROOT}/dev-addons"
-ADDON="presence-monitor"
+set -a
+. "${ROOT_DIR}/.env.dev"
+set +a
 
-if [[ -d "${HASSIO_ADDONS}/${ADDON}" ]]; then
+ADDON_NAME="presence-monitor"
+
+HASSIO_ADDONS="${ROOT_DIR}/dev-addons"
+ADDON_LOCAL_DIR="${ROOT_DIR}/${ADDON_NAME}"
+ADDON_HASSIO_DIR="${HASSIO_ADDONS}/${ADDON_NAME}"
+GITHUB_URL="$( cat "${ADDON_LOCAL_DIR}/config.json" | jq '.url' )"
+
+if [[ -d "${ADDON_HASSIO_DIR}" ]]; then
     log.info "Removing old version of addon..."
-    rm -Rf "${HASSIO_ADDONS}/${ADDON}"
+    rm -Rf "${ADDON_HASSIO_DIR}"
 fi
 
 log.info "Copy new version of addon..."
-cp -R "${ROOT}/${ADDON}" "${HASSIO_ADDONS}/"
-sed '/"image":/d' "${ROOT}/${ADDON}/config.json" >"${HASSIO_ADDONS}/${ADDON}/config.json"
+cp -R "${ADDON_LOCAL_DIR}" "${HASSIO_ADDONS}/"
+sed '/"image":/d' "${ADDON_LOCAL_DIR}/config.json" >"${ADDON_HASSIO_DIR}/config.json"
+
+#log.info "Build addon docker container..."
+#docker run -t --rm --privileged --name "${ADDON_NAME}" \
+#    -v "${ROOT_DIR}":/docker \
+#    hassioaddons/build-env:latest \
+#    --target "${ADDON_NAME}" \
+#    --git \
+#    --push \
+#    --all \
+#    --author "Andrey Khrolenok <andrey@khrolenok.ru>" \
+#    --doc-url "${GITHUB_URL}" \
+#    --login "${DOCKER_USERNAME}" \
+#    --password "${DOCKER_PASSWORD}" \
+#    --parallel

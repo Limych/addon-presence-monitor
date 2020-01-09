@@ -3,7 +3,7 @@
   "version": "dev",
   "slug": "presence-monitor",
   "description": "Passive Bluetooth presence detection of beacons, cell phones, and other Bluetooth devices.",
-  "url": "https://github.com/Limych/hassio-addons/tree/master/presence-monitor",
+  "url": "https://github.com/Limych/addon-presence-monitor",
   "image": "limych/hassio-presence-monitor-{arch}",
   "startup": "services",
   "arch": [
