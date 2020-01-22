@@ -34,6 +34,7 @@ RUN install -d \
     && chmod a+x \
         monitor.sh \
         /run.sh \
+        /health.sh \
     # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as ${PREF_CONFIG_DIR}) and sometimes its in the app root (i.e. /monitor)
     && ln -s ${PREF_CONFIG_DIR}/.public_name_cache .public_name_cache \
     # no systemctl ... this keeps the error out about it
