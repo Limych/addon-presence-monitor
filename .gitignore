@@ -1,4 +1,8 @@
-/.idea/
 /dev-addons
 
 .env*
+
+# Idea workspace
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/shelf
