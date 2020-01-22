@@ -5,9 +5,9 @@
 # ==============================================================================
 
 MAX_MSG_DELAY=${PREF_LAST_MSG_DELAY:-300}
-LAST_ACTIVITY=$(date --date="$(journalctl -u monitor -n 1 -o short-iso --utc --quiet|awk '{ print $1 }')" +"%s")
+LAST_ACTIVITY=$(cat last_msg)
 ELAPSED=$(echo "$(date +"%s") - ${LAST_ACTIVITY}"|bc)
 
 bashio::log.debug "Time since last message: ${ELAPSED} seconds"
 
-[[ ${ELAPSED} -gt ${MAX_MSG_DELAY} ]] && bashio::exit.nok "Monitor seems died. Restarting."
+[[ ${ELAPSED} -gt ${MAX_MSG_DELAY} ]] && bashio::exit.nok "Monitor seems died. Need restarting."

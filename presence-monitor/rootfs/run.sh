@@ -24,6 +24,10 @@ service bluetooth start
 
 bashio::log.info "Starting Bluetooth Presence Monitor..."
 
+# write out the timestamp of the last msg received
+date +%s > last_msg
+while true; do [[ -e main_pipe ]] && read line < main_pipe && date +%s > last_msg; done &
+
 declare -a args
 
 # Find the matching Bluetooth Presence Monitor log level
