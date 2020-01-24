@@ -11,3 +11,5 @@ ELAPSED=$(echo "$(date +"%s") - ${LAST_ACTIVITY}"|bc)
 bashio::log.debug "Time since last message: ${ELAPSED} seconds"
 
 [[ ${ELAPSED} -gt ${MAX_MSG_DELAY} ]] && bashio::exit.nok "Monitor seems died. Need restarting."
+
+bashio::exit.ok
