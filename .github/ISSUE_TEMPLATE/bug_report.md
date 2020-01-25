@@ -8,6 +8,10 @@ assignees: ''
 
 <!-- Before you open a new issue, search through the existing issues to see if others have had the same problem.
 
+Please make sure that your issue RELATES TO the operation of THIS ADD-ON, not to the operation of the monitor script.
+Issues on the operation of the monitor script MUST be opened in the script repository:
+https://github.com/andrewjfreyer/monitor/issues
+
 Issues not containing the minimum requirements will be closed:
 
 - Issues without a description (using the header is not good enough) will be closed.

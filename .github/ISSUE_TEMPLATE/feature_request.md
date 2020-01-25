@@ -4,8 +4,15 @@ about: Suggest an idea for this project
 title: ''
 labels: 'enhancement'
 assignees: ''
-
 ---
+
+<!--
+
+Please make sure that your request RELATES TO the operation of THIS ADD-ON, not to the operation of the monitor script.
+Requests on the operation of the monitor script MUST be opened in the script repository:
+https://github.com/andrewjfreyer/monitor/issues
+
+-->
 
 **Is your feature request related to a problem? Please describe.**
 
