@@ -22,6 +22,16 @@ service bluetooth start
 
 
 
+bashio::log.info "Updating Bluetooth Presence Monitor to latest version..."
+
+git fetch --depth=1 \
+    && git checkout -f \
+    && git pull \
+    && chmod a+x monitor.sh \
+    && sed -i "s|^systemctl is-active.*|SERVICE_ACTIVE=false|" support/init
+
+
+
 bashio::log.info "Starting Bluetooth Presence Monitor..."
 
 # write out the timestamp of the last msg received
@@ -43,7 +53,7 @@ if bashio::config.has_value 'known.beacons'; then
     args+=(-b)
 fi
 
-while monitor ${args[@]} $(bashio::config 'extra_arguments') >&2; do
+while monitor -D /opt/monitor ${args[@]} $(bashio::config 'extra_arguments') >&2; do
     bashio::log.info "Restarting Bluetooth Presence Monitor..."
 done
 exit $?

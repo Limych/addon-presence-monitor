@@ -19,28 +19,24 @@ RUN apt-get update \
 COPY rootfs /
 
 # Configure system
-ARG PREF_CONFIG_DIR=/opt/monitor
 RUN install -d \
-        ${PREF_CONFIG_DIR} \
-    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" /etc/cont-init.d/monitor.sh \
+        /opt/monitor \
     \
     && cd /monitor \
     && touch \
         .pids \
         .previous_version \
-        ${PREF_CONFIG_DIR}/.public_name_cache \
+        /opt/monitor/.public_name_cache \
     # make things executable
     && ln -s /monitor/monitor.sh /usr/local/bin/monitor \
     && chmod a+x \
         monitor.sh \
         /run.sh \
         /health.sh \
-    # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as ${PREF_CONFIG_DIR}) and sometimes its in the app root (i.e. /monitor)
-    && ln -s ${PREF_CONFIG_DIR}/.public_name_cache .public_name_cache \
+    # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as /opt/monitor) and sometimes its in the app root (i.e. /monitor)
+    && ln -s /opt/monitor/.public_name_cache .public_name_cache \
     # no systemctl ... this keeps the error out about it
-    && sed -i "s|systemctl is-active.*|SERVICE_ACTIVE=false|" support/init \
-    # default config directory to come from an environment variable
-    && sed -i "s|PREF_CONFIG_DIR=.*|PREF_CONFIG_DIR=\"${PREF_CONFIG_DIR}\"|" support/argv
+    && sed -i "s|^systemctl is-active.*|SERVICE_ACTIVE=false|" support/init
 
 WORKDIR /monitor
 

@@ -4,10 +4,7 @@
 # Runs some initializations for Bluetooth Presence Monitor
 # ==============================================================================
 
-readonly PREF_CONFIG_DIR="/opt/monitor"
 readonly SHARE="/share/presence-monitor"
-
-echo "${PREF_CONFIG_DIR}" >/var/run/s6/container_environment/PREF_CONFIG_DIR
 
 declare publisher="$(bashio::config mqtt.publisher)"
 if [[ -z "${publisher}" ]]; then
@@ -31,7 +28,7 @@ if ! bashio::fs.directory_exists "${SHARE}"; then
     mkdir "${SHARE}"
 fi
 
-ln -s "${SHARE}/behavior_preferences" "${PREF_CONFIG_DIR}/behavior_preferences"
+ln -s "${SHARE}/behavior_preferences" "/opt/monitor/behavior_preferences"
 [[ ! -f "${SHARE}/behavior_preferences" ]] \
     && cat >"${SHARE}/behavior_preferences" <<EOF
 # ---------------------------
@@ -63,7 +60,7 @@ PREF_DEVICE_TRACKER_REPORT=true
 
 EOF
 
-cat >"${PREF_CONFIG_DIR}/mqtt_preferences" <<EOF
+cat >"/opt/monitor/mqtt_preferences" <<EOF
 # ---------------------------
 # MQTT PREFERENCES
 # ---------------------------
@@ -94,7 +91,7 @@ mqtt_version='$(bashio::config mqtt.version)'
 
 EOF
 
-cat >"${PREF_CONFIG_DIR}/address_blacklist" <<EOF
+cat >"/opt/monitor/address_blacklist" <<EOF
 # ---------------------------
 # LIST OF MAC ADDRESSES TO IGNORE, ONE PER LINE
 # ---------------------------
@@ -103,7 +100,7 @@ $(bashio::config blacklist)
 
 EOF
 
-cat >"${PREF_CONFIG_DIR}/known_beacon_addresses" <<EOF
+cat >"/opt/monitor/known_beacon_addresses" <<EOF
 # ---------------------------
 # BEACON MAC ADDRESS LIST; REQUIRES NAME
 #   Format: 00:00:00:00:00:00 Nickname #comments
@@ -113,7 +110,7 @@ $(bashio::config known.beacons)
 
 EOF
 
-cat >"${PREF_CONFIG_DIR}/known_static_addresses" <<EOF
+cat >"/opt/monitor/known_static_addresses" <<EOF
 # ---------------------------
 # STATIC MAC ADDRESS LIST
 #   Format: 00:00:00:00:00:00 Alias #comment
@@ -124,9 +121,9 @@ $(bashio::config known.static)
 EOF
 
 if bashio::debug; then
-    cat "${PREF_CONFIG_DIR}/behavior_preferences" >&2
-    cat "${PREF_CONFIG_DIR}/mqtt_preferences" >&2
-    cat "${PREF_CONFIG_DIR}/address_blacklist" >&2
-    cat "${PREF_CONFIG_DIR}/known_static_addresses" >&2
-    cat "${PREF_CONFIG_DIR}/known_beacon_addresses" >&2
+    cat "/opt/monitor/behavior_preferences" >&2
+    cat "/opt/monitor/mqtt_preferences" >&2
+    cat "/opt/monitor/address_blacklist" >&2
+    cat "/opt/monitor/known_static_addresses" >&2
+    cat "/opt/monitor/known_beacon_addresses" >&2
 fi
