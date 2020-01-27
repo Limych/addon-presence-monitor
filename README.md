@@ -61,18 +61,18 @@ I put a lot of work into making this repo and component available and updated to
 
 Bluetooth Presence Monitor Hass.io add-on configuration:
 
+**Note:** _This is just an example, don't copy and paste it! Create your own!_
+
 ```json
 {
   "log_level": "info",
   "mqtt": {
     "broker": "127.0.0.1",
     "port": 1883,
-    "username": "user",
+    "username": "mqtt_user",
     "password": "secret_password",
-    "topic_root": "/presence",
-    "publisher": "",
-    "certfile": "",
-    "version": ""
+    "topic_root": "presence",
+    "publisher": ""
   },
   "known": {
     "beacons": [
@@ -90,8 +90,6 @@ Bluetooth Presence Monitor Hass.io add-on configuration:
   "extra_arguments": "-a -x -b -tdr"
 }
 ```
-
-**Note:** _This is just an example, don't copy and paste it! Create your own!_
 
 ### Option: `log_level`
 

@@ -29,9 +29,7 @@
       "username": "",
       "password": "",
       "topic_root": "presence",
-      "publisher": "",
-      "certfile": "",
-      "version": ""
+      "publisher": ""
     },
     "known": {
       "beacons": [
@@ -51,8 +49,8 @@
       "password": "str",
       "topic_root": "str",
       "publisher": "str",
-      "certfile": "str",
-      "version": "str"
+      "certfile": "str?",
+      "version": "str?"
     },
     "known": {
       "beacons": [
