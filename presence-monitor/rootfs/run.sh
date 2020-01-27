@@ -25,7 +25,7 @@ service bluetooth start
 bashio::log.info "Updating Bluetooth Presence Monitor to latest version..."
 
 git fetch --depth=1
-git checkout -f
+git checkout origin/master -f
 git pull -f
 
 
