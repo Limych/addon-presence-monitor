@@ -26,9 +26,7 @@ bashio::log.info "Updating Bluetooth Presence Monitor to latest version..."
 
 git fetch --depth=1 \
     && git checkout -f \
-    && git pull -f \
-    && chmod a+x monitor.sh \
-    && sed -i "s|^systemctl is-active.*|SERVICE_ACTIVE=false|" support/init
+    && git pull -f
 
 
 
