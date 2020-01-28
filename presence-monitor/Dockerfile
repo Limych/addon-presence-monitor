@@ -14,6 +14,7 @@ RUN apt-get update \
         procps \
         usbutils \
     && git clone --branch "master" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
+    && cd /monitor \
     && git checkout origin/master -f
 
 # Copy root filesystem
