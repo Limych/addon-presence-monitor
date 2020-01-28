@@ -16,9 +16,17 @@ if [[ -z "${publisher}" ]]; then
     fi
 fi
 
-declare certpath="$(bashio::config mqtt.certfile)"
-if [[ -n "${certpath}" ]]; then
-    certpath="${SHARE}/${certpath}"
+declare certpath=""
+if $(bashio::config.exists mqtt.certfile); then
+    certpath="$(bashio::config mqtt.certfile)"
+    if [[ -n "${certpath}" ]]; then
+        certpath="${SHARE}/${certpath}"
+    fi
+fi
+
+declare version=""
+if $(bashio::config.exists mqtt.version); then
+    version="$(bashio::config mqtt.version)"
 fi
 
 bashio::log.info "Updating running configuration..."
@@ -87,7 +95,7 @@ mqtt_publisher_identity='${publisher}'
 mqtt_certificate_path='${certpath}'
 
 # MQTT VERSION (EXAMPLE: 'mqttv311')
-mqtt_version='$(bashio::config mqtt.version)'
+mqtt_version='${version}'
 
 EOF
 
