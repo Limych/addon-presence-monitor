@@ -13,7 +13,8 @@ RUN apt-get update \
         mosquitto-clients \
         procps \
         usbutils \
-    && git clone --branch "master" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor
+    && git clone --branch "master" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
+    && git checkout origin/master -f
 
 # Copy root filesystem
 COPY rootfs /
