@@ -300,8 +300,7 @@ SOFTWARE.
 [keepchangelog]: http://keepachangelog.com/en/1.0.0/
 [license-shield]: https://img.shields.io/github/license/Limych/addon-presence-monitor.svg
 [limych]: https://github.com/Limych
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-<!-- [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg -->
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [releases-shield]: https://img.shields.io/github/tag-date/Limych/addon-presence-monitor?label=release
 [releases]: https://github.com/Limych/addon-presence-monitor/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
