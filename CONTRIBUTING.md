@@ -7,6 +7,10 @@ Contributing to this project should be as easy and transparent as possible, whet
 - Submitting a fix
 - Proposing new features
 
+## IMPORTANT! Install development environment first
+
+When making changes in code, please use the existing development environment - this will save you from many errors and help create more convenient code to support. To install the environment, run the dev-setup.sh script.
+
 ## Github is used for everything
 
 Github is used to host code, to track issues and feature requests, as well as accept pull requests.
@@ -14,9 +18,9 @@ Github is used to host code, to track issues and feature requests, as well as ac
 Pull requests are the best way to propose changes to the codebase.
 
 1. Fork the repo and create your branch from `master`.
-2. If you've changed something, update the documentation.
-3. Make sure your code lints (using black).
-4. Issue that pull request!
+1. If you've changed something, update the documentation.
+1. Make sure your code lints (using black).
+1. Issue that pull request!
 
 ## Any contributions you make will be under the MIT Software License
 
@@ -24,7 +28,7 @@ In short, when you submit code changes, your submissions are understood to be un
 
 ## Report bugs using Github's [issues](../../issues)
 
-GitHub issues are used to track public bugs.  
+GitHub issues are used to track public bugs.
 Report a bug by [opening a new issue](../../issues/new/choose); it's that easy!
 
 ## Write bug reports with detail, background, and sample code
