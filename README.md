@@ -69,9 +69,9 @@ log_level: info
 mqtt:
   broker: 127.0.0.1
   port: 1883
-  username: !secret mqtt_user
-  password: !secret mqtt_password
-  topic_root: presence
+  username: '!secret mqtt_user'
+  password: '!secret mqtt_password'
+  topic_root: 'presence'
   publisher: ''
 known:
   beacons:
