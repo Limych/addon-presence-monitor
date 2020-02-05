@@ -60,34 +60,29 @@ I put a lot of work into making this repo and component available and updated to
 
 Bluetooth Presence Monitor Hass.io add-on configuration:
 
-**Note:** _This is just an example, don't copy and paste it! Create your own!_
+```yaml
+# Note:
+# This is just an example, don't copy and paste it!
+# Create your own!
 
-```json
-{
-  "log_level": "info",
-  "mqtt": {
-    "broker": "127.0.0.1",
-    "port": 1883,
-    "username": "mqtt_user",
-    "password": "secret_password",
-    "topic_root": "presence",
-    "publisher": ""
-  },
-  "known": {
-    "beacons": [
-      "00:00:00:00:00:00 nickname",
-      "00:00:00:00:00:01 other_nickname"
-    ],
-    "static": [
-      "00:00:00:00:00:02",
-      "00:00:00:00:00:03 alias"
-    ]
-  },
-  "blacklist": [
-    "00:00:00:00:00:04"
-  ],
-  "extra_arguments": "-a -x -b -tdr"
-}
+log_level: info
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  topic_root: presence
+  publisher: ''
+known:
+  beacons:
+    - '00:00:00:00:00:00 nickname'
+    - '00:00:00:00:00:01 other_nickname'
+  static:
+    - '00:00:00:00:00:02'
+    - '00:00:00:00:00:03 alias'
+blacklist:
+  - '00:00:00:00:00:04'
+extra_arguments: "-a -x -b -tdr"
 ```
 
 ### Option: `log_level`
