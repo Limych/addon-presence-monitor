@@ -26,9 +26,14 @@ Passive Bluetooth presence detection of beacons, cell phones, and other Bluetoot
 This add-on actually is a usage convenient shell for launching [the Andrew J Freyer's monitor script](https://github.com/andrewjfreyer/monitor) on the same machine where the Home Assistant itself works.
 This script useful for MQTT-based home automation, especially when the script runs on multiple devices, distributed throughout a property.
 
-You can combine add-on and common versions of this presence monitor script in any combinations.
+## Features
 
-<!-- ## Features -->
+* Convenient way to start indoor presence detection.
+* You can use Home Assistant configuration secrets in add-on configuration.
+* All necessary software is installed by itself. And regularly updated to the latest versions.
+* The script is almost configured — just enter a couple of remaining settings.
+* Complete freedom in reconfiguring the script to your needs.
+* You can combine add-on and common versions of this presence monitor script in any combinations.
 
 ## Add add-on to Hass.io
 
@@ -69,10 +74,10 @@ log_level: info
 mqtt:
   broker: 127.0.0.1
   port: 1883
-  username: '!secret mqtt_user'
-  password: '!secret mqtt_password'
+  username: '!secret mqtt_username'   # Yes, you can use
+  password: '!secret mqtt_password'   # secrets in config :)
   topic_root: 'presence'
-  publisher: ''
+  publisher: ''             # Autoselect publisher identity
 known:
   beacons:
     - '00:00:00:00:00:00 nickname'
@@ -258,7 +263,7 @@ Thank you for being involved! :heart_eyes:
 
 ## Authors & contributors
 
-The original setup of this repository is by [Andrey "Limych" Khrolenok][limych].
+The original setup of this add-on is by [Andrey "Limych" Khrolenok][limych].
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].
