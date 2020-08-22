@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v3.2.0
     hooks:
       - id: check-json
       - id: check-yaml
@@ -10,7 +10,7 @@ repos:
       - id: end-of-file-fixer
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     # Require ruby-dev package installed:
-    rev: 1.11.2
+    rev: 2.1.4
     hooks:
       - id: forbid-binary
       - id: markdownlint # Configure in .mdlrc

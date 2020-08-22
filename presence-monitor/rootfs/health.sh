@@ -5,7 +5,7 @@
 # ==============================================================================
 
 MAX_MSG_DELAY=${PREF_LAST_MSG_DELAY:-300}
-LAST_ACTIVITY=$(cat last_msg)
+LAST_ACTIVITY=$(cat /monitor/last_msg)
 ELAPSED=$(echo "$(date +"%s") - ${LAST_ACTIVITY}"|bc)
 
 bashio::log.debug "Time since last message: ${ELAPSED} seconds"

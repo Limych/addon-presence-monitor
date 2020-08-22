@@ -36,7 +36,6 @@ RUN install -d /opt/monitor \
 
 WORKDIR /monitor
 
-CMD /run.sh
 HEALTHCHECK CMD /health.sh
 
 #

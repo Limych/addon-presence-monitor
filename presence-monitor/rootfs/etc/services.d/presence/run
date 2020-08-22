@@ -3,6 +3,7 @@
 # Limych's Hass.io Add-ons: Bluetooth Presence Monitor
 # Run Bluetooth Presence Monitor
 # ==============================================================================
+declare -a options
 
 bashio::log.info "Starting required services..."
 
@@ -24,6 +25,7 @@ service bluetooth start
 
 bashio::log.info "Updating Bluetooth Presence Monitor to latest version..."
 
+cd /monitor
 git fetch --depth=1
 git checkout origin/master -f
 git pull -f
@@ -38,7 +40,7 @@ while true; do [[ -e main_pipe ]] && read line < main_pipe && date +%s > last_ms
 
 declare -a args
 
-# Find the matching Bluetooth Presence Monitor log level
+# Find the matching log level
 if bashio::config.has_value 'log_level'; then
     case "$(bashio::string.lower "$(bashio::config 'log_level')")" in
         all|trace|debug)
@@ -51,7 +53,4 @@ if bashio::config.has_value 'known.beacons'; then
     args+=(-b)
 fi
 
-while monitor -D /opt/monitor ${args[@]} $(bashio::config 'extra_arguments') >&2; do
-    bashio::log.info "Restarting Bluetooth Presence Monitor..."
-done
-exit $?
+exec ./monitor.sh -D /opt/monitor ${args[@]} $(bashio::config 'extra_arguments') >&2
