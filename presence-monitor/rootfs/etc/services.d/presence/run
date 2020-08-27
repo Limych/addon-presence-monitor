@@ -36,7 +36,7 @@ bashio::log.info "Starting Bluetooth Presence Monitor..."
 
 # write out the timestamp of the last msg received
 date +%s > last_msg
-while true; do [[ -e main_pipe ]] && read line < main_pipe && date +%s > last_msg; done &
+while true; do [[ -e main_pipe ]] && read line < main_pipe && date +%s > last_msg; sleep 25; done &
 
 declare -a args
 

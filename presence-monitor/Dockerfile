@@ -36,7 +36,7 @@ RUN install -d /opt/monitor \
 
 WORKDIR /monitor
 
-HEALTHCHECK CMD /health.sh
+HEALTHCHECK CMD [ "/health.sh" ]
 
 #
 # LABEL target docker image
