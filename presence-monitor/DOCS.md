@@ -149,7 +149,7 @@ The following options are only for the option group: `known`. They determine the
 #### Option `known`: `beacons`
 
 This option allow you to set list of MAC-addresses of [iBeacons](https://en.wikipedia.org/wiki/IBeacon) and similar devices which use a little different protocol.
-Each device must be described in a separate list item.
+Each device MUST be described in a separate list item.
 
 **Items format:** _"{MAC-address} {nickname of device}"_
 
@@ -158,7 +158,7 @@ Each device must be described in a separate list item.
 #### Option `known`: `static`
 
 This option allow you to set list of MAC-addresses of common devices.
-Each device must be described in a separate list item.
+Each device MUST be described in a separate list item.
 
 **Items format:** _"{MAC-address} {alias of device}"_
 
@@ -169,7 +169,7 @@ Each device must be described in a separate list item.
 ### Option `blacklist`
 
 This option allow you to set list of MAC-addresses of devices you don't want to monitor.
-Each device must be described in a separate list item.
+Each device MUST be described in a separate list item.
 
 **Items format:** _"{MAC-address}"_
 
